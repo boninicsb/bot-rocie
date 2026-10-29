@@ -1,8 +1,7 @@
 const { sendTextMessage } = require("./whatsappService");
+const { welcomeMessage, dedupeTtlMs } = require("../config");
 
-const greeting = "Olá! Bem-vindo ao atendimento automatizado do Grupo ROCIE. Como podemos ajudar?";
 const handledMessages = new Map();
-const dedupeTtlMs = 60 * 60 * 1000;
 
 function isGreeting(value) {
   if (typeof value !== "string") return false;
@@ -27,7 +26,7 @@ async function processWebhook(event) {
         if (handledMessages.has(message.id)) continue;
         handledMessages.set(message.id, now);
         try {
-          await sendTextMessage(message.from, greeting);
+          await sendTextMessage(message.from, welcomeMessage);
           console.log("Automatic greeting sent successfully");
         } catch (error) {
           handledMessages.delete(message.id);

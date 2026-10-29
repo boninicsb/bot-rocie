@@ -1,12 +1,12 @@
-const graphVersion = process.env.META_GRAPH_VERSION || "v23.0";
+const { metaGraphVersion, whatsappAccessToken, whatsappPhoneNumberId } = require("../config");
 
 async function sendTextMessage(to, message) {
-  const token = process.env.WHATSAPP_ACCESS_TOKEN;
-  const phoneId = process.env.WHATSAPP_PHONE_NUMBER_ID;
+  const token = whatsappAccessToken;
+  const phoneId = whatsappPhoneNumberId;
   if (!token || !phoneId) throw new Error("WhatsApp send credentials are missing");
 
   const response = await fetch(
-    `https://graph.facebook.com/${graphVersion}/${encodeURIComponent(phoneId)}/messages`,
+    `https://graph.facebook.com/${metaGraphVersion}/${encodeURIComponent(phoneId)}/messages`,
     {
       method: "POST",
       headers: {

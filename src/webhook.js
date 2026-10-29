@@ -1,4 +1,5 @@
 const crypto = require("node:crypto");
+const { metaAppSecret, whatsappVerifyToken } = require("./config");
 const { processWebhook } = require("./services/messageProcessor");
 
 const maxBodyBytes = 1024 * 1024;
@@ -9,7 +10,7 @@ function json(res, status, data) {
 }
 
 function verifyWebhook(url, res) {
-  const configuredToken = process.env.WHATSAPP_VERIFY_TOKEN;
+  const configuredToken = whatsappVerifyToken;
   const mode = url.searchParams.get("hub.mode");
   const token = url.searchParams.get("hub.verify_token");
   const challenge = url.searchParams.get("hub.challenge");
@@ -23,7 +24,7 @@ function verifyWebhook(url, res) {
 }
 
 function receiveWebhook(req, res) {
-  const appSecret = process.env.META_APP_SECRET;
+  const appSecret = metaAppSecret;
   if (!appSecret) return json(res, 503, { error: "Webhook not configured" });
 
   const chunks = [];

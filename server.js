@@ -1,7 +1,6 @@
 const http = require("node:http");
+const { port } = require("./src/config");
 const { verifyWebhook, receiveWebhook } = require("./src/webhook");
-
-const port = Number(process.env.PORT || 3000);
 
 function json(res, status, data) {
   res.writeHead(status, { "Content-Type": "application/json; charset=utf-8" });

@@ -5,7 +5,7 @@
   "description": "Webhook WhatsApp Cloud API - Bot ROCIE",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node --env-file=.env server.js"
   },
   "engines": {
     "node": ">=22"
