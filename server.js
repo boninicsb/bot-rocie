@@ -13,7 +13,7 @@ const server = http.createServer((req, res) => {
   if (req.method === "GET" && url.pathname === "/") {
     return json(res, 200, {
       status: "online",
-      projeto: "Bot ROCIE",
+      projeto: "BOT ROCIE TESTE",
       mensagem: "Servidor Node.js funcionando!",
       data: new Date().toISOString()
     });
